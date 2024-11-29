@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projet Individuel: L'Habitation Contemporaine</title>
+    <style>
+        body {
+            font-family: "Arial", sans-serif;
+            background: linear-gradient(180deg, #fdf6e3, #f1eadc);
+            color: #333;
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            transition: background-color 1s ease;
+        }
+        header {
+            background-color: #ffddb8;
+            color: #5a3e36;
+            text-align: center;
+            padding: 20px;
+            border-bottom: 5px solid #5a3e36;
+            animation: fadeInDown 1.5s ease-out;
+        }
+        header h1 {
+            font-size: 2.8em;
+            margin: 0;
+            font-family: 'Georgia', serif;
+        }
+        header p {
+            font-size: 1.3em;
+            margin: 10px 0;
+        }
+        nav {
+            background-color: #5a3e36;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: #fdf6e3;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 1.1em;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        section {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        section.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        section h2 {
+            color: #5a3e36;
+            font-size: 2em;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #ffddb8;
+            padding-bottom: 5px;
+        }
+        section p, section ul {
+            margin: 10px 0;
+            font-size: 1.2em;
+        }
+        section img {
+            max-width: 100%;
+            display: block;
+            margin: 15px 0;
+            border-radius: 10px;
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        section.active img {
+            opacity: 1;
+            transform: scale(1);
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul li {
+            background-color: #ffefdc;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        section.active ul li {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        section.active ul li:nth-child(1) {
+            transition-delay: 0.2s;
+        }
+        section.active ul li:nth-child(2) {
+            transition-delay: 0.4s;
+        }
+        section.active ul li:nth-child(3) {
+            transition-delay: 0.6s;
+        }
+        section.active ul li:nth-child(4) {
+            transition-delay: 0.8s;
+        }
+        footer {
+            background-color: #5a3e36;
+            color: #fdf6e3;
+            text-align: center;
+            padding: 15px 0;
+            margin-top: 20px;
+        }
+        footer p {
+            margin: 0;
+            font-size: 1em;
+        }
+        footer a {
+            color: #fdf6e3;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+        #scrollToTop {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #ffddb8;
+            color: #5a3e36;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5em;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        #scrollToTop:hover {
+            background-color: #ffcc99;
+            transform: scale(1.1);
+        }
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        section img:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s ease;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        input, textarea {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        button {
+            background-color: #5a3e36;
+            color: #fdf6e3;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #ffddb8;
+        }
+        .source-section {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin: 30px auto;
+            max-width: 800px;
+        }
+        .source-section h2 {
+            color: #5a3e36;
+            font-size: 2em;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #ffddb8;
+            padding-bottom: 5px;
+        }
+        .source-links {
+            list-style-type: none;
+            padding: 0;
+            text-align: left;
+        }
+        .source-links li {
+            background-color: #ffefdc;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .source-links a {
+            text-decoration: none;
+            color: #6a4f4b;
+            font-size: 1.2em;
+        }
+        .source-links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Projet</h1>
+    <p>La Maison Contemporaine de Ma Famille</p>
+</header>
+
+<nav>
+    <a href="#introduction">Introduction</a>
+    <a href="#caracteristiques">Caractéristiques</a>
+    <a href="#plan">Plan de Construction</a>
+    <a href="#avantages">Avantages</a>
+    <a href="#description">Description</a>
+    <a href="#contact">Contact</a>
+    <a href="#sources">Sources</a>
+</nav>
+
+<section id="introduction">
+    <h2>Introduction</h2>
+    <p>Ce projet présente une vision d'une maison contemporaine, alliant confort, modernité et fonctionnalité, idéale pour ma famille.</p>
+    <img src="Images/Poza.jpg" alt="Image de la maison contemporaine">
+</section>
+
+<section id="caracteristiques">
+    <h2>Caractéristiques Principales</h2>
+    <ul>
+        <li>🏡 <strong>Architecture contemporaine et harmonieuse</strong></li>
+        <li>🌳 <strong>Connexions fluides entre les espaces intérieurs et extérieurs</strong></li>
+        <li>🕯️ <strong>Utilisation optimale de la lumière naturelle</strong></li>
+        <li>🛋️ <strong>Espaces de vie spacieux et confortables</strong></li>
+    </ul>
+</section>
+
+<section id="plan">
+    <h2>Plan de Construction</h2>
+    <p>Le plan inclura des matériaux modernes et durables, tels que le béton et le verre, pour créer une maison qui s'intègre harmonieusement dans son environnement.</p>
+    <img src="Images/Schematica.jpg" alt="Image du plan de construction">
+</section>
+
+<section id="avantages">
+    <h2>Avantages pour la Famille</h2>
+    <ul>
+        <li>🏡 <strong>Cadre de vie moderne :</strong> Une maison conçue pour favoriser la convivialité et le partage des moments en famille.</li>
+        <li>🌳 <strong>Espaces extérieurs :</strong> Un jardin spacieux pour des activités en plein air et des moments de détente.</li>
+        <li>🕯️ <strong>Lumière naturelle :</strong> De grandes fenêtres qui inondent les pièces de lumière, créant une atmosphère chaleureuse.</li>
+        <li>🛋️ <strong>Confort :</strong> Des espaces de vie ouverts et accueillants, parfaits pour se rassembler.</li>
+    </ul>
+</section>
+
+<section id="description">
+    <h2>Description de la Maison</h2>
+    <p><strong>Emplacement :</strong> Située en Provence, ma maison sera entourée de paysages naturels, offrant une vue magnifique sur les collines.</p>
+    <p><strong>Style :</strong> La maison adoptera un style contemporain, avec des murs en béton et de grandes fenêtres. Elle comprendra deux étages, avec un grand espace de vie reliant la cuisine, la salle à manger et le salon. Les grandes baies vitrées permettront à la lumière naturelle d'illuminer chaque coin de la maison, tout en offrant un accès direct à une terrasse ensoleillée.</p>
+    <p>La cuisine sera équipée d'appareils modernes et d'un îlot central, parfait pour cuisiner en famille. À l'étage, il y aura deux chambres confortables.</p>
+    <p>À l'extérieur, sera aménagé un potager, et une piscine pour se rafraîchir pendant les chaudes journées d'été. Un espace barbecue sera également prévu pour des repas en plein air en famille et entre amis. La maison sera entourée de terrasses en bois, idéales pour se détendre et profiter du climat méditerranéen. Cette habitation sera un lieu où confort, nature et modernité se rencontrent, offrant un cadre de vie idéal pour ma famille.</p>
+</section>
+
+<section id="sources" class="source-section">
+    <h2>Sources</h2>
+    <ul class="source-links">
+        <li><a href="https://earthroulette.com/countries/France" target="_blank">Générateur de localisation aléatoire</a></li>
+        <li><a href="https://www.construiresamaison.com/plans-maison/une-maison-en-provence/a18597" target="_blank">Le plan de la maison</a></li>
+        <li><a href="https://images.google.com/" target="_blank">Google Images</a></li>
+    </ul>
+</section>
+
+<section id="gallery-link" style="text-align: center; background-color: #ffddb8; padding: 20px; border-radius: 12px; margin: 20px auto; max-width: 600px;">
+    <h2 style="color: #5a3e36;">Découvrez notre Galerie d'Images</h2>
+    <a href="Photos.html" style="background-color: #5a3e36; color: #fdf6e3; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-size: 1.2em; transition: background-color 0.3s ease;">
+        Voir la Galerie
+    </a>
+</section>
+
+<footer>
+    <p>Fabriqué avec passion par Iurascu Iulian</p>
+    <p>
+        <a href="https://www.facebook.com" target="_blank">Facebook</a> |
+        <a href="https://www.instagram.com" target="_blank">Instagram</a> |
+        <a href="https://www.twitter.com" target="_blank">Twitter</a>
+    </p>
+</footer>
+
+<button id="scrollToTop">↑</button>
+
+<script>
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    });
+
+    const sections = document.querySelectorAll('section');
+    sections.forEach(section => observer.observe(section));
+
+    const navLinks = document.querySelectorAll('nav a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = e.target.getAttribute('href');
+            document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+
+    const scrollToTopButton = document.getElementById('scrollToTop');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            scrollToTopButton.style.display = 'flex';
+        } else {
+            scrollToTopButton.style.display = 'none';
+        }
+    });
+
+    scrollToTopButton.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+</script>
+
+</body>
+</html>

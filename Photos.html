@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galerie de Photos</title>
+    <style>
+        body {
+            font-family: "Arial", sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        header {
+            background-color: #ffcc99;
+            color: #5a3e36;
+            text-align: center;
+            padding: 40px 20px;
+            border-bottom: 5px solid #5a3e36;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        header h1 {
+            font-size: 3.5em;
+            margin: 0;
+            font-family: 'Georgia', serif;
+        }
+        header p {
+            font-size: 1.4em;
+            margin: 10px 0;
+        }
+        nav {
+            background-color: #5a3e36;
+            padding: 15px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        nav a {
+            color: #fdf6e3;
+            margin: 0 20px;
+            text-decoration: none;
+            font-size: 1.2em;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #ffddb8;
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        .gallery-item {
+            position: relative;
+            margin: 10px;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+            width: calc(33.333% - 20px);
+            cursor: pointer;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+            display: block;
+            transition: transform 0.3s;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+            border-radius: 15px;
+        }
+        .gallery-item:hover .overlay {
+            opacity: 1;
+        }
+        footer {
+            background-color: #5a3e36;
+            color: #fdf6e3;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 30px;
+        }
+        footer p {
+            margin: 0;
+            font-size: 1em;
+        }
+        footer a {
+            color: #fdf6e3;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+    .small-link {
+    text-align: center;
+    margin: 10px 0; 
+    font-size: 0.8em; 
+}
+
+.small-link a {
+    color: #5a3e36; 
+    text-decoration: none; 
+}
+
+.small-link a:hover {
+    text-decoration: underline;
+}
+        
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto;
+            background-color: rgba( 0, 0, 0, 0.8); 
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover;
+        }
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover,
+        .close:focus {
+            color: #ffcc99;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        @media (max-width: 768px) {
+            .gallery-item {
+                width: calc(50% - 20px);
+            }
+        }
+        @media (max-width: 480px) {
+            .gallery-item {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Galerie de Photos</h1>
+    <p>Découvrez les merveilles de la Provence!</p>
+</header>
+
+<nav>
+    <a href="index.html">Accueil</a>
+    <a href="Photos.html">Galerie</a>
+</nav>
+
+<div class="gallery">
+    <div class="gallery-item" onclick="openModal('image1.jpg')">
+        <img src="Images/Image1.jpg" alt="Description de l'image 1">
+        <div class="overlay">Aurel</div>
+    </div>
+    <div class="gallery-item" onclick="openModal('image2.jpg')">
+        <img src="Images/Image2.jpg" alt="Description de l'image 2">
+        <div class="overlay">L'Isle-sur-la-Sorgue</div>
+    </div>
+    <div class="gallery-item" onclick="openModal('image3.jpg')">
+        <img src="Images/image3.jpg" alt="Description de l'image 3">
+        <div class="overlay">Champ de fleurs de lavande</div>
+    </div>
+    <div class="gallery-item" onclick="openModal('image4.jpg')">
+        <img src="Images/image4.jpg" alt="Description de l'image 4">
+        <div class="overlay">Gordes, Vaucluse</div>
+    </div>
+    <div class="gallery-item" onclick="openModal('image5.jpg')">
+        <img src="Images/image5.jpg" alt="Description de l'image 5">
+        <div class="overlay">Cassis</div>
+    </div>
+    <div class="gallery-item" onclick="openModal('image6.jpg')">
+        <img src="Images/image6.jpg" alt="Description de l'image 6">
+        <div class="overlay">Pont du Gard</div>
+    </div>
+</div>
+
+<div id="myModal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImage" alt="Modal Image">
+</div>
+
+<div class="small-link">
+    <a href="https://www.gettyimages.com/search/2/image?phrase=provence&sort=mostpopular&license=rf%2Crm" target="_blank">Plus de photos ici!</a>
+</div>
+
+<footer>
+    <p>Fabriqué avec passion par Iurascu Iulian</p>
+    <p>
+        <a href="https://www.facebook.com" target="_blank">Facebook</a> |
+        <a href="https://www.instagram.com" target="_blank">Instagram</a> |
+        <a href="https://www.twitter.com" target="_blank">Twitter</a>
+    </p>
+</footer>
+
+<script>
+    function openModal(imageSrc) {
+        const modal = document.getElementById("myModal");
+        const modalImage = document.getElementById("modalImage");
+        modal.style.display = "flex";
+        modalImage.src = imageSrc;
+    }
+
+    function closeModal() {
+        const modal = document.getElementById("myModal");
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        const modal = document.getElementById("myModal");
+        if (event.target == modal) {
+            closeModal();
+        }
+    }
+</script>
+
+</body>
+</html>
